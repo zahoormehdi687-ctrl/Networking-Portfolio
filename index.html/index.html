@@ -533,10 +533,10 @@ const SKILLS = [
 ];
 
 const CERTS = [
-  {title:"CCNA",            issuer:"Cisco Systems",       year:"2023", icon:"🏅", color:"#00d4ff", badge:"CISCO"},
-  {title:"GPON Training",   issuer:"Telecom Academy",     year:"2022", icon:"🎖️",  color:"#00ffaa", badge:"GPON"},
-  {title:"Fiber Optics",    issuer:"Fiber Institute",     year:"2022", icon:"🥇", color:"#ff6b35", badge:"FIBER"},
-  {title:"Huawei Networking",issuer:"Huawei Technologies",year:"2023", icon:"🏆", color:"#ffcc00", badge:"HUAWEI"},
+  {title:"CCNA",            issuer:"Cisco Systems",       year:"2025", icon:"🏅", color:"#00d4ff", badge:"CISCO", img:"assets/images/ccna-cert.jpg"},
+  {title:"GPON Training",   issuer:"PTCL",                year:"2025", icon:"🎖️",  color:"#00ffaa", badge:"GPON", img:"assets/images/gpon-cert.jpg"},
+  {title:"Fiber Optics",    issuer:"International Fiber", year:"2025", icon:"🥇", color:"#ff6b35", badge:"FIBER", img:"assets/images/fiber-cert.jpg"},
+  {title:"Huawei Networking",issuer:"Huawei Technologies",year:"2025", icon:"🏆", color:"#ffcc00", badge:"HUAWEI", img:"assets/images/huawei-cert.jpg"},
 ];
 
 const PROJECTS = [
@@ -616,6 +616,18 @@ CERTS.forEach(c => {
     <div class="cert-title">${c.title}</div>
     <div class="cert-issuer">${c.issuer}</div>
     <div class="cert-year">${c.year}</div>
+
+        ${c.img ? `
+    <div style="margin-top:1rem;">
+      <img src="${c.img}" alt="${c.title} Certificate"
+        style="width:100%;border-radius:8px;border:1px solid ${c.color}40;
+               cursor:pointer;transition:transform 0.3s;opacity:0.85;"
+        onmouseenter="this.style.transform='scale(1.03)';this.style.opacity='1'"
+        onmouseleave="this.style.transform='scale(1)';this.style.opacity='0.85'"
+        onclick="document.getElementById('cert-modal').style.display='flex';
+                 document.getElementById('cert-modal-img').src=this.src;">
+    </div>` : ''}
+
   </div>`;
 });
 
@@ -835,5 +847,25 @@ document.getElementById('nav-toggle').addEventListener('click',()=>{
 });
 function closeMobile(){document.getElementById('mobile-menu').classList.remove('open');}
 </script>
+<!-- CERT IMAGE MODAL -->
+<div id="cert-modal"
+  style="display:none;position:fixed;inset:0;z-index:9000;
+         background:rgba(0,0,0,0.92);align-items:center;
+         justify-content:center;padding:2rem;"
+  onclick="this.style.display='none'">
+
+  <img id="cert-modal-img" src=""
+    style="max-width:90%;max-height:90vh;border-radius:12px;
+           border:2px solid #00d4ff;
+           box-shadow:0 0 60px rgba(0,212,255,0.4);">
+
+  <div style="position:absolute;top:20px;right:28px;
+              color:#00d4ff;font-size:28px;
+              cursor:pointer;font-family:monospace;"
+    onclick="document.getElementById('cert-modal').style.display='none'">
+    ✕
+  </div>
+
+</div>
 </body>
 </html>
